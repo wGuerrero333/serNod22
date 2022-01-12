@@ -46,7 +46,6 @@ res.json(product);
 
 // });
 
-
 // las rutas adsolutas van primero que las opcionales
 router.get('/:id', (req, res) => {
   const { id } = req.params;
@@ -84,6 +83,13 @@ const body = req.body;
 res.status(201).json(productService);
 });
 
+router.put('/update/:id',(req,res)=>{
+  const { id } = req.params;
+  const body = req.body;
+  const product = service.update(id, body)
+  res.json(product);
+});
+
 // parchar solo una cosa
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
@@ -94,6 +100,16 @@ router.patch('/:id', (req, res) => {
     id,
   });
 });
+
+router.delete('/delete/:id',(req,res)=>{
+  const { id } = req.params;
+  
+  const respuesta = service.delete(id)
+  res.json(respuesta);
+
+
+})
+
 // para borrar se envia el :id como param del elemtno a borrar e.g http://localhost:3000/products/33 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;

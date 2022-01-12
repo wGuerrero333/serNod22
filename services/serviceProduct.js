@@ -35,16 +35,15 @@ class productService {
     }
 
   }
-  postear(data){
-    const  productService = {
-    
-    price,
-    image,
-    name,
- 
-    id: faker.datatype.uuid(),
-    // ...data
-        }
+  postear({ name, price, image }) {
+    const productService = {
+      id: faker.datatype.uuid(),
+      name,
+      price,
+      image,
+
+      //tambien se puede enviando a data como paremetro y dejando en esta parte  ...data
+    }
     this.arrayProductos.push(productService);
     return productService;
   }
@@ -56,11 +55,33 @@ class productService {
   findOne(id) {
     // si el array contiene un elemento con el id que produce el faker se pasa como parametro lo filtra y retorna
     return this.arrayProductos.filter(elemento => elemento.id === id);
-
+  }
+  update(id, changes) {
+    // para saber si esta el elemento buscado se busca el index
+    const index = this.arrayProductos.findIndex(elemento => elemento.id === id)
+    // si no se encuentra va a retornar -1
+    if (index === -1) {
+      throw new Error('El indice no se encuentra en el arrayProduct')
+    }
+    const product = this.arrayProductos[index];
+    // este this.arrayProductos[index] representa el producto en el index que psamos como paramtro para buscar
+    this.arrayProductos[index] = {
+      // de esta manera persisten los datos preexitentes y tambien los changes que este aplicando
+      ...product,
+      ...changes
+    }
+    return this.arrayProductos[index];
 
   }
-  delete() {
 
+
+  delete(id) {
+    const index = this.arrayProductos.findIndex(item => item.id === id);
+    if (index === -1) {
+      throw new Error('product not found');
+    }
+    this.arrayProductos.splice(index, 1);
+    return  { message: `Id de producto borrado: ${id}` };
   }
 
 }
