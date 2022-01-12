@@ -35,6 +35,21 @@ class productService {
     }
 
   }
+  postear(data){
+    const  productService = {
+    
+    price,
+    image,
+    name,
+ 
+    id: faker.datatype.uuid(),
+    // ...data
+        }
+    this.arrayProductos.push(productService);
+    return productService;
+  }
+
+
   find() {
     return this.arrayProductos;
   }

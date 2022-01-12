@@ -17,5 +17,5 @@ app.get('/nueva-ruta', (req, res) => {
 routerApi(app);
 
 app.listen(port, () => {
-    console.log('Escuchando por el puerto hecho por el gay: ' + port);
+    console.log('Escuchando por el puerto hecho por el instructor: ' + port);
 })

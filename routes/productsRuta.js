@@ -76,6 +76,14 @@ res.status(201).json({
   data:body
 });
 });
+
+router.post('/create',(req,res)=>{
+  // este body tiene TODA la info que me llega de la solicitud por el POSTMAN
+const body = req.body;
+ const productService = service.postear(body);
+res.status(201).json(productService);
+});
+
 // parchar solo una cosa
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
